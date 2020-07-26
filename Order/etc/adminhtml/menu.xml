@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+
+        <add id="ALevel_Order::menu"
+             title="ALevel Menu"
+             translate="title"
+             module="ALevel_Order"
+             sortOrder="1"
+             resource="ALevel_Order::menu"/>
+
+
+        <add id="ALevel_Order::order"
+             title="Order"
+             translate="title"
+             module="ALevel_Order"
+             sortOrder="2"
+             parent="ALevel_Order::menu"
+             action="alevel_order/grid/listing"
+             resource="ALevel_Order::order"
+        />
+
+    </menu>
+</config>

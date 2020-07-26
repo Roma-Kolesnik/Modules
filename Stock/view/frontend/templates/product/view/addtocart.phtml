@@ -36,44 +36,17 @@
                 </button>
                 <?= $block->getChildHtml('', true) ?>
             </div>
-            <div class="actions">
-                <button type="button"
-                        title="Quick Order"
-                        class="action primary tocart"
-                        id="quick-order-button">
-                    Quick Order
-                </button>
-            </div>
         </div>
     </div>
 <?php endif; ?>
-
 <script type="text/x-magento-init">
     {
         "#product_addtocart_form": {
             "Magento_Catalog/js/validate-product": {}
         }
     }
-
 </script>
 
-<div data-bind="scope: 'component-quick-order'">
-    <!-- ko template: getTemplate() --><!-- /ko -->
+<div id="popup-modal" style="display: none;">
+    <h1>Do you want to take part in the action?</h1>
 </div>
-
-<script type="text/x-magento-init">
-{
-    "*": {
-        "Magento_Ui/js/core/app": <?= /* @noEscape */ $block->getJsLayout() ?>
-    }
-}
-</script>
-
-
-<!--<script type="text/x-magento-init">-->
-<!--    {-->
-<!--        "#quick-order-form": {-->
-<!--            "ALevel_QuickOrder/js/send-info": {}-->
-<!--        }-->
-<!--    }-->
-<!--</script>-->

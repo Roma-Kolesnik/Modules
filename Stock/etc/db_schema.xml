@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="alevel_stock" resource="default" engine="innodb" comment="Alevel stock">
+        <column xsi:type="int"
+                name="id"
+                padding="10"
+                unsigned="false"
+                nullable="false"
+                identity="true"
+                comment="ID"/>
+        <column xsi:type="varchar"
+                name="customer_name"
+                nullable="false"
+                length="25"
+                comment="Name"/>
+        <column xsi:type="varchar"
+                name="email"
+                nullable="false"
+                length="25"
+                comment="Email"/>
+        <column xsi:type="smallint"
+                name="is_enabled"
+                padding="6"
+                unsigned="false"
+                nullable="false"
+                identity="false"
+                comment="Is Enabled"/>
+        <column xsi:type="timestamp"
+                name="updated_at"
+                on_update="true"
+                nullable="false"
+                default="CURRENT_TIMESTAMP"
+                comment="Update Time"/>
+        <column xsi:type="int"
+                name="customer_id"
+                padding="10"
+                unsigned="false"
+                nullable="false"
+                identity="false"
+                comment="Customer_ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+
+    <table name="alevel_stock_products" resource="default" engine="innodb" comment="Alevel stock products">
+        <column xsi:type="smallint"
+                name="id"
+                padding="6"
+                unsigned="false"
+                nullable="false"
+                identity="true"
+                comment="ID"/>
+        <column xsi:type="varchar"
+                name="name"
+                nullable="false"
+                length="25"
+                comment="Name"/>
+        <column xsi:type="varchar"
+                name="products_ids"
+                nullable="false"
+                length="25"
+                comment="Email"/>
+        <column xsi:type="smallint"
+                name="is_enabled"
+                padding="6"
+                unsigned="false"
+                nullable="false"
+                identity="false"
+                comment="Is Enabled"/>
+        <column xsi:type="timestamp"
+                name="updated_at"
+                on_update="true"
+                nullable="false"
+                default="CURRENT_TIMESTAMP"
+                comment="Update Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+</schema>

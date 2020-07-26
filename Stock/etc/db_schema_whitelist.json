@@ -1,0 +1,26 @@
+{
+    "alevel_stock": {
+        "column": {
+            "id": true,
+            "customer_name": true,
+            "email": true,
+            "is_enabled": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "alevel_stock_products": {
+        "column": {
+            "id": true,
+            "name": true,
+            "products_ids": true,
+            "is_enabled": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

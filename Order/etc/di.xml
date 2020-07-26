@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="ALevel\Order\Api\OrderInterface"
+                type="ALevel\Order\Model\Order"/>
+
+    <preference for="ALevel\Order\Api\OrderRepositoryInterface"
+                type="ALevel\Order\Model\OrderRepository"/>
+
+    <virtualType name="ALevel\Order\Model\ResourceModel\Order\GridCollection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">products</argument>
+            <argument name="resourceModel"
+                      xsi:type="string">ALevel\Order\Model\ResourceModel\Order</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="alevel_order_listing_data_source"
+                      xsi:type="string">ALevel\Order\Model\ResourceModel\Order\GridCollection
+
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>
