@@ -11,18 +11,18 @@
         <referenceBlock name="product.info.addtocart.additional">
             <action method="setTemplate">
                 <argument name="template" xsi:type="string">ALevel_QuickOrder::product/view/addtocart.phtml</argument>
-                <argument name="jsLayout" xsi:type="array">
-                    <item name="components" xsi:type="array">
-                        <item name="component-quick-order" xsi:type="array">
-                            <item name="component" xsi:type="string">ALevel_QuickOrder/js/send-info</item>
-                            <item name="config" xsi:type="array">
-                                <item name="template" xsi:type="string">ALevel_QuickOrder/send-info</item>
-                            </item>
-                            <item name="url" xsi:type="string">q_order/record/add</item>
-                        </item>
-                    </item>
-                </argument>
             </action>
+            <argument name="jsLayout" xsi:type="array">
+                <item name="components" xsi:type="array">
+                    <item name="component-quick-order" xsi:type="array">
+                        <item name="component" xsi:type="string">ALevel_QuickOrder/js/send-info</item>
+                        <item name="config" xsi:type="array">
+                            <item name="template" xsi:type="string">ALevel_QuickOrder/send-info</item>
+                        </item>
+                        <item name="url" xsi:type="string">q_order/record/add</item>
+                    </item>
+                </item>
+            </argument>
         </referenceBlock>
     </body>
 </page>
