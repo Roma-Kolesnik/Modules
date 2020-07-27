@@ -1,10 +1,15 @@
-define(
-    [
+define([
         'uiComponent',
         'jquery',
         'Magento_Ui/js/modal/modal',
+        'mage/url'
     ],
-    function (Component, $, modal) {
+    function (
+        Component,
+        $,
+        modal,
+        urlBuilder
+    ) {
         'use strict';
 
         let options = {
@@ -29,6 +34,7 @@ define(
         });
 
         return Component.extend({
+
             defaults: {
                 nameSelector: "#customerName",
                 phoneSelector: "#customerPhone",
@@ -36,11 +42,11 @@ define(
                 skuSelector: $("#product_addtocart_form").attr("data-product-sku")
             },
 
-            // initialize: function () {
-            //     this._super();
-            //     this.infoProvider();
-            //     return this;
-            // },
+            initialize: function () {
+                this._super();
+                this.infoProvider();
+                return this;
+            },
 
             sendInfo: function () {
 
@@ -49,8 +55,8 @@ define(
                 name = $(this.nameSelector).val();
                 phone = $(this.phoneSelector).val();
                 email = $(this.emailSelector).val();
-                //sku = $("#product_addtocart_form").attr("data-product-sku");
                 sku = $(this.skuSelector);
+                //sku = $("#product_addtocart_form").attr("data-product-sku");
 
                 this.infoProvider({'name': name, 'phone': phone, 'email': email, 'sku': sku});
             },
@@ -58,9 +64,10 @@ define(
             infoProvider: function (data = {}) {
 
                 //let _self = this;
+                let url = urlBuilder.build(this.url);
 
                 $.ajax({
-                    url: BASE_URL + 'q_order/record/add',
+                    url: url,
                     data: data,
                     type: 'POST',
                     dataType: 'json'
