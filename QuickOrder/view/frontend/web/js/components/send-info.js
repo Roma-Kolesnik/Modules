@@ -12,6 +12,7 @@ define([
     ) {
         'use strict';
 
+
         let options = {
             type: 'popup',
             responsive: true,

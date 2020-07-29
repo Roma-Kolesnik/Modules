@@ -4,6 +4,7 @@
 
     <preference for="ALevel\QuickOrder\Api\Data\OrderInterface"
                 type="ALevel\QuickOrder\Model\Order"/>
+
     <preference for="ALevel\QuickOrder\Api\Repository\OrderRepositoryInterface"
                 type="ALevel\QuickOrder\Repository\OrderRepository"/>
 
@@ -44,7 +45,7 @@
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="quick_order_status_data_source"
+                <item name="status_grid_data_source"
                       xsi:type="string">ALevel\QuickOrder\Model\ResourceModel\Status\GridCollection
                 </item>
             </argument>

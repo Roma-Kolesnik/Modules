@@ -1,6 +1,6 @@
 <?php
 
-namespace ALevel\QuickOrder\UI\Component\Form;
+namespace ALevel\QuickOrder\Ui\Component\Form;
 
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 

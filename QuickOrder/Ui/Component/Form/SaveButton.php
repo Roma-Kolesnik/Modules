@@ -1,13 +1,13 @@
 <?php
 
-namespace ALevel\QuickOrder\UI\Component\Form;
+namespace ALevel\QuickOrder\Ui\Component\Form;
 
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 use Magento\Ui\Component\Control\Container;
 
 /**
  * Class SaveButton
- * @package ALevel\QuickOrder\UI\Component\Form
+ * @package ALevel\QuickOrder\Ui\Component\Form
  */
 class SaveButton extends GenericButton implements ButtonProviderInterface
 {

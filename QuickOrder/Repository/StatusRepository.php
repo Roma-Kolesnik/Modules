@@ -1,140 +1,123 @@
 <?php
 
-
 namespace ALevel\QuickOrder\Repository;
 
+use Magento\Framework\Exception\CouldNotDeleteException;
+use Magento\Framework\Exception\CouldNotSaveException;
+use Psr\Log\LoggerInterface;
+
 use ALevel\QuickOrder\Api\Data\StatusInterface;
+use ALevel\QuickOrder\Api\Data\StatusInterfaceFactory;
 use ALevel\QuickOrder\Api\Repository\StatusRepositoryInterface;
 use ALevel\QuickOrder\Model\ResourceModel\Status as ResourceModel;
 use ALevel\QuickOrder\Model\ResourceModel\Status\Collection;
 use ALevel\QuickOrder\Model\ResourceModel\Status\CollectionFactory;
-use ALevel\QuickOrder\Model\StatusFactory as ModelFactory;
+use ALevel\QuickOrder\Api\Data\StatusSearchResultInterface;
+use ALevel\QuickOrder\Api\Data\StatusSearchResultInterfaceFactory;
+
 use Magento\Framework\Api\SearchCriteriaInterface;
-use Magento\Framework\Api\SearchResultsInterface;
+use Magento\Framework\Data\SearchResultInterface;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
-use Magento\Framework\Api\SearchResultsInterfaceFactory;
-use Magento\Framework\Exception\CouldNotDeleteException;
-use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 
 class StatusRepository implements StatusRepositoryInterface
 {
-    /**
-     * @var ResourceModel
-     */
-    private $resource;
+    private $resourceModel;
 
-    /**
-     * @var ModelFactory
-     */
     private $modelFactory;
 
-    /**
-     * @var CollectionFactory
-     */
     private $collectionFactory;
 
     /**
      * @var CollectionProcessorInterface
      */
-    private $processor;
+    private $collectionProcessor;
 
     /**
-     * @var SearchResultsInterfaceFactory
+     * @var StatusSerachResultInterfaceFactory
      */
     private $searchResultFactory;
 
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
     public function __construct(
-        ResourceModel $resource,
-        ModelFactory $modeFactory,
+        ResourceModel $resourceModel,
+        StatusInterfaceFactory $statusInterfaceFactory,
         CollectionFactory $collectionFactory,
+        StatusSearchResultInterfaceFactory $searchResultFactory,
         CollectionProcessorInterface $collectionProcessor,
-        SearchResultsInterfaceFactory $searchResultFactory
-    )
-    {
-        $this->resource = $resource;
-        $this->modelFactory = $modeFactory;
-        $this->collectionFactory = $collectionFactory;
-        $this->processor = $collectionProcessor;
-        $this->searchResultFactory = $searchResultFactory;
+        LoggerInterface $logger
+    ) {
+        $this->resourceModel        = $resourceModel;
+        $this->modelFactory         = $statusInterfaceFactory;
+        $this->collectionFactory    = $collectionFactory;
+        $this->searchResultFactory  = $searchResultFactory;
+        $this->collectionProcessor  = $collectionProcessor;
+        $this->logger               = $logger;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getById(int $id): StatusInterface
     {
-        $status = $this->modelFactory->create();
+        $model = $this->modelFactory->create();
 
-        $this->resource->load($status, $id);
+        $this->resourceModel->load($model, $id);
 
-        if (empty($status->getId())) {
-            throw new NoSuchEntityException(__("Status %1 not found", $id));
+        if (null === $model->getStatusId()) {
+            throw new NoSuchEntityException(__('Model with %1 not found', $id));
         }
 
-        return $status;
+        return $model;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getList(SearchCriteriaInterface $searchCriteria): SearchResultsInterface
+    public function getList(SearchCriteriaInterface $searchCriteria): SearchResultInterface
     {
-        /** @var Collection $collection */
         $collection = $this->collectionFactory->create();
 
-        $this->processor->process($searchCriteria, $collection);
+        $this->collectionProcessor->process($searchCriteria, $collection);
 
-        /** @var SearchResultsInterface $searchResult */
         $searchResult = $this->searchResultFactory->create();
 
-        $searchResult->setSearchCriteria($searchCriteria);
         $searchResult->setTotalCount($collection->getSize());
-        $searchResult->setItems($collection->getItems());
+        $searchResult->setSearchCriteria($searchCriteria);
+        $searchResult->setItems($collection->getData());
 
         return $searchResult;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function save(StatusInterface $status): StatusInterface
     {
         try {
-            $this->resource->save($status);
+            $this->resourceModel->save($status);
         } catch (\Exception $e) {
-            // added logger
-            throw new CouldNotSaveException(__("Status could not save"));
+            $this->logger->error($e->getMessage());
+            throw new CouldNotSaveException(__("Index not saved"));
         }
 
         return $status;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public
-    function delete(StatusInterface $status): StatusRepositoryInterface
+    public function delete(StatusInterface $status): StatusRepositoryInterface
     {
         try {
-            $this->resource->delete($status);
+            $this->resourceModel->delete($status);
         } catch (\Exception $e) {
-            throw new CouldNotDeleteException("Status not delete");
+            $this->logger->error($e->getMessage());
+            throw new CouldNotDeleteException(__("Index %1 not deleted", $status->getStatusId()));
+        }
+    }
+
+    public function deleteById(int $id): StatusRepositoryInterface
+    {
+        try {
+            $model = $this->getById($id);
+            $this->delete($model);
+        } catch (NoSuchEntityException $e) {
+            $this->logger->warning(sprintf("Index %d already deleted or not found", $id));
         }
 
         return $this;
     }
-
-    /**
-     * @inheritDoc
-     */
-    public
-    function deleteById(int $id): StatusRepositoryInterface
-    {
-        $status = $this->getById($id);
-        $this->delete($status);
-
-        return $this;
-    }
-
 }

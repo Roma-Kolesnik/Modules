@@ -3,7 +3,7 @@
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
         <add id="ALevel_QuickOrder::menu"
-             title="ALevel Quick Order"
+             title="Quick Order"
              translate="title"
              module="ALevel_QuickOrder"
              sortOrder="19"
@@ -19,12 +19,12 @@
              resource="ALevel_QuickOrder::quick_order"/>
 
         <add id="ALevel_QuickOrder::quick_order_status"
-             title="Status"
+             title="Status Grid"
              translate="title"
              module="ALevel_QuickOrder"
              sortOrder="3"
              parent="ALevel_QuickOrder::menu"
-             action="quick_order/grid/status"
+             action="quick_order/status/index"
              resource="ALevel_QuickOrder::quick_order_status"/>
 
     </menu>

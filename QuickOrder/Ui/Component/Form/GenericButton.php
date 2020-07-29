@@ -1,6 +1,6 @@
 <?php
 
-namespace ALevel\QuickOrder\UI\Component\Form;
+namespace ALevel\QuickOrder\Ui\Component\Form;
 
 use Magento\Backend\Block\Widget\Context;
 use Magento\Framework\Exception\NoSuchEntityException;

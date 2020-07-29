@@ -1,6 +1,6 @@
 <?php
 
-namespace ALevel\QuickOrder\UI\Component\Form;
+namespace ALevel\QuickOrder\Ui\Component\Form;
 
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
@@ -14,7 +14,7 @@ class DeleteButton extends GenericButton implements ButtonProviderInterface
         $data = [];
         if ($this->getStatusId()) {
             $data = [
-                'label' => __('Delete Status'),
+                'label' => __('Delete Index'),
                 'class' => 'delete',
                 'on_click' => 'deleteConfirm(\'' . __(
                         'Are you sure you want to do this?'

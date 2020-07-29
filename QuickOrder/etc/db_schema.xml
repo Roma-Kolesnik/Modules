@@ -47,19 +47,17 @@
                 nullable="false"
                 default="CURRENT_TIMESTAMP"
                 comment="Update Time"/>
-        <column xsi:type="int"
-                name="status_id"
-                padding="2"
-                unsigned="true"
+        <column xsi:type="varchar"
+                name="label"
+                length="20"
                 nullable="false"
-                identity="false"
-                comment="Status Id"/>
+                comment="Status Label"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="order_id"/>
         </constraint>
-        <index referenceId="INDEX_SEVERITY" indexType="btree">
-            <column name="status_id"/>
-        </index>
+<!--        <index referenceId="INDEX_SEVERITY" indexType="btree">-->
+<!--            <column name="label"/>-->
+<!--        </index>-->
     </table>
     <table name="alevel_quick_order_status" resource="default" engine="innodb" comment="Alevel Status">
         <column xsi:type="int"
@@ -77,12 +75,12 @@
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="status_id"/>
         </constraint>
-        <index referenceId="INDEX_SEVERITY" indexType="btree">
-            <column name="status_id"/>
-        </index>
-        <constraint xsi:type="foreign" referenceId="FL_ALLOWED_SEVERITIES"
-                    table="alevel_quick_order_status" column="status_id"
-                    referenceTable="alevel_quick_order" referenceColumn="status_id"
-                    onDelete="CASCADE"/>
+<!--        <index referenceId="INDEX_SEVERITY" indexType="btree">-->
+<!--            <column name="label"/>-->
+<!--        </index>-->
+<!--        <constraint xsi:type="foreign" referenceId="FL_ALLOWED_SEVERITIES"-->
+<!--                    table="alevel_quick_order" column="label"-->
+<!--                    referenceTable="alevel_quick_order_status" referenceColumn="label"-->
+<!--                    onDelete="CASCADE"/>-->
     </table>
 </schema>
