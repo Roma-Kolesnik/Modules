@@ -119,7 +119,7 @@
             </argument>
         </selectionsColumn>
 
-        <column name="status_id">
+        <column name="status_code">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="visible" xsi:type="boolean">true</item>

@@ -65,12 +65,14 @@ class Save extends Action
                 }
             }
 
-            $model->setData($data);
+            $model->setData($data['status_id']);
+            $model->setStatus($data['status']);
+            $model->setStatusCode($data['status_code']);
 
             try {
                 $this->repository->save($model);
                 $this->messageManager->addSuccessMessage(__('You saved the status.'));
-                $this->dataPersistor->clear('status');
+                $this->dataPersistor->clear('status_id');
                 return $this->processReturn($model, $data, $resultRedirect);
             } catch (LocalizedException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
@@ -78,7 +80,7 @@ class Save extends Action
                 $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the status.'));
             }
 
-            $this->dataPersistor->set('status', $data);
+            $this->dataPersistor->set('status_id', $data);
             return $resultRedirect->setPath('*/*/edit', ['id' => $id]);
         }
         return $resultRedirect->setPath('*/*/listing');

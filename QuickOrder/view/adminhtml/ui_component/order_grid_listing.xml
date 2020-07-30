@@ -16,13 +16,13 @@
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="class" xsi:type="string">\Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
             <argument name="name" xsi:type="string">order_grid_listing_data_source</argument>
-            <argument name="primaryFieldName" xsi:type="string">order_id</argument>
-            <argument name="requestFieldName" xsi:type="string">order_id</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="update_url" xsi:type="url" path="mui/index/render" />
                     <item name="storageConfig" xsi:type="array">
-                        <item name="indexField" xsi:type="string">order_id</item>
+                        <item name="indexField" xsi:type="string">id</item>
                     </item>
                 </item>
             </argument>
@@ -59,38 +59,6 @@
                 </item>
             </argument>
         </filters>
-        <massaction name="listing_massaction">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/tree-massactions</item>
-                </item>
-            </argument>
-            <action name="delete">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="type" xsi:type="string">delete</item>
-                        <item name="label" xsi:type="string" translate="true">Delete</item>
-                        <item name="url" xsi:type="url" path="*/*/massDelete"/>
-                        <item name="confirm" xsi:type="array">
-                            <item name="title" xsi:type="string" translate="true">Delete items</item>
-                            <item name="message" xsi:type="string" translate="true">Are you sure you want to delete selected items?</item>
-                        </item>
-                    </item>
-                </argument>
-            </action>
-            <action name="edit">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="type" xsi:type="string">edit</item>
-                        <item name="label" xsi:type="string" translate="true">Edit</item>
-                        <item name="callback" xsi:type="array">
-                            <item name="provider" xsi:type="string">status_grid.status_grid.status_grid_columns_editor</item>
-                            <item name="target" xsi:type="string">editSelected</item>
-                        </item>
-                    </item>
-                </argument>
-            </action>
-        </massaction>
         <paging name="listing_paging">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -105,21 +73,18 @@
             </argument>
         </paging>
     </container>
-
-    <selectionsColumn name="ids">
-        <argument name="data" xsi:type="array">
-            <item name="config" xsi:type="array">
-                <item name="indexField" xsi:type="string">order_id</item>
-            </item>
-            <item name="sortOrder" xsi:type="number">0</item>
-        </argument>
-    </selectionsColumn>
-
     <columns name="order_grid_columns">
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">order_id</item>
+                </item>
+            </argument>
+        </selectionsColumn>
         <column name="order_id">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">Order ID</item>
+                    <item name="filter" xsi:type="string">Record ID</item>
                     <item name="label" xsi:type="string" translate="true">Order ID</item>
                     <item name="sortOrder" xsi:type="number">10</item>
                     <item name="editor" xsi:type="string">text</item>

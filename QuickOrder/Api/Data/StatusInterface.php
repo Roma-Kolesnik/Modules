@@ -8,7 +8,9 @@ interface StatusInterface
 {
     const STATUS_ID = 'status_id';
 
-    const LABEL = 'status';
+    const STATUS_CODE = 'status_code';
+
+    const STATUS = 'status';
 
     /**
      * @return mixed
@@ -22,14 +24,26 @@ interface StatusInterface
     public function setStatusId($status_id);
 
     /**
+     * @param $status_code
+     * @return mixed
+     */
+    public function getStatusCode();
+
+    /**
+     * @param $status_code
+     * @return mixed
+     */
+    public function setStatusCode($status_code);
+
+    /**
      * @return mixed
      */
     public function getStatus();
 
     /**
-     * @param $label
+     * @param $status
      * @return mixed
      */
-    public function setStatus($label);
+    public function setStatus($status);
 
 }

@@ -24,13 +24,23 @@ class Status extends AbstractModel implements StatusInterface
         $this->setData(self::STATUS_ID, $status_id);
     }
 
-    public function getStatus()
+    public function getStatusCode()
     {
-        return $this->_getData(self::LABEL);
+        return $this->_getData(self::STATUS_CODE);
     }
 
-    public function setStatus($label)
+    public function setStatusCode($status_code)
     {
-        $this->setData(self::LABEL, $label);
+        $this->setData(self::STATUS_CODE, $status_code);
+    }
+
+    public function getStatus()
+    {
+        return $this->_getData(self::STATUS);
+    }
+
+    public function setStatus($status)
+    {
+        $this->setData(self::STATUS, $status);
     }
 }
