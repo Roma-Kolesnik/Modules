@@ -5,7 +5,7 @@ namespace ALevel\QuickOrder\Api\Repository;
 
 use ALevel\QuickOrder\Api\Data\StatusInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
-use Magento\Framework\Data\SearchResultInterface;
+use Magento\Framework\Api\SearchResultsInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -23,9 +23,9 @@ interface StatusRepositoryInterface
 
     /**
      * @param SearchCriteriaInterface $searchCriteria
-     * @return SearchResultInterface
+     * @return SearchResultsInterface
      */
-    public function getList(SearchCriteriaInterface $searchCriteria) : SearchResultInterface;
+    public function getList(SearchCriteriaInterface $searchCriteria) : SearchResultsInterface;
 
     /**
      * @param StatusInterface $status

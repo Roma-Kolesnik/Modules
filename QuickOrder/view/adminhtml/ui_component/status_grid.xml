@@ -118,6 +118,7 @@
                 </item>
             </argument>
         </selectionsColumn>
+
         <column name="status_id">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -128,7 +129,7 @@
             </argument>
         </column>
 
-        <column name="label" >
+        <column name="status" >
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="editor" xsi:type="string">text</item>
@@ -138,7 +139,7 @@
             </argument>
         </column>
 
-        <actionsColumn name="actions" class="ALevel\QuickOrder\Ui\Component\Listing\Column\Actions">
+        <actionsColumn name="actions" class="ALevel\QuickOrder\Ui\Component\Listing\Column\ActionsStatus">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="indexField" xsi:type="string">status_id</item>

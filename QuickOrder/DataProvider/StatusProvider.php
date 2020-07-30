@@ -1,64 +1,64 @@
 <?php
 
-
 namespace ALevel\QuickOrder\DataProvider;
 
-use Magento\Ui\DataProvider\AbstractDataProvider;
+use Magento\Ui\DataProvider\ModifierPoolDataProvider;
+use Magento\Framework\App\Request\DataPersistorInterface;
 use ALevel\QuickOrder\Api\Data\StatusInterface;
+use ALevel\QuickOrder\Model\ResourceModel\Status\Collection;
 use ALevel\QuickOrder\Model\ResourceModel\Status\CollectionFactory;
 
-class StatusProvider extends AbstractDataProvider
+class StatusProvider extends ModifierPoolDataProvider
 {
-    private $collectionFactory;
+    /**
+     * @var Collection
+     */
+    private $colleciton;
 
     /**
-     * @param string $name
-     * @param string $primaryFieldName
-     * @param string $requestFieldName
-     * @param CollectionFactory $collectionFactory
-     * @param array $meta
-     * @param array $data
+     * @var DataPersistorInterface
      */
+    private $dataPersistor;
+
+    /**
+     * @var array
+     */
+    private $loadedData = [];
+
     public function __construct(
         $name,
         $primaryFieldName,
         $requestFieldName,
         CollectionFactory $collectionFactory,
+        DataPersistorInterface $dataPersistor,
         array $meta = [],
         array $data = []
-    )
-    {
+    ) {
         $this->collection = $collectionFactory->create();
-        $this->collectionFactory = $collectionFactory;
+        $this->dataPersistor = $dataPersistor;
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 
     public function getData()
     {
-        if (isset($this->loadedData)) {
+        if (!empty($this->loadedData)) {
             return $this->loadedData;
         }
 
         $items = $this->collection->getItems();
-
-        if (empty($items)) {
-            return [];
+        /** @var StatusInterface $block */
+        foreach ($items as $status) {
+            $this->loadedData[$status->getId()] = $status->getData();
         }
 
-        /** @var $item StatusInterface */
-        foreach ($items as $item) {
-            $this->loadedData[$item->getStatusId()] = $item->getData();
+        $data = $this->dataPersistor->get('status');
+        if (!empty($data)) {
+            $status = $this->collection->getNewEmptyItem();
+            $status->setData($data);
+            $this->loadedData[$status->getId()] = $status->getData();
+            $this->dataPersistor->clear('status');
         }
 
         return $this->loadedData;
-    }
-
-    private function getStatusCollection()
-    {
-        if (null === $this->collection) {
-            $this->collection = $this->collectionFactory->create();
-        }
-
-        return $this->collection;
     }
 }

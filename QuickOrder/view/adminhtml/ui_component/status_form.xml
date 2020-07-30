@@ -21,7 +21,9 @@
     </argument>
     <settings>
         <buttons>
-            <button name="save" class="ALevel\QuickOrder\Block\Adminhtml\Status\Edit\SaveButton"/>
+            <button name="save" class="ALevel\QuickOrder\Ui\Component\Form\SaveButton"/>
+            <button name="back" class="ALevel\QuickOrder\Ui\Component\Form\BackButton"/>
+            <button name="delete" class="ALevel\QuickOrder\Ui\Component\Form\DeleteButton"/>
         </buttons>
         <namespace>status_form</namespace>
         <dataScope>data</dataScope>
@@ -68,10 +70,10 @@
             </argument>
         </field>
 
-        <field name="label">
+        <field name="status">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="label" xsi:type="string">Label</item>
+                    <item name="label" xsi:type="string">Status</item>
                     <item name="visible" xsi:type="boolean">true</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">input</item>

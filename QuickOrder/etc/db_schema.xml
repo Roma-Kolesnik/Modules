@@ -1,10 +1,4 @@
 <?xml version="1.0"?>
-<!--
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
--->
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
     <table name="alevel_quick_order" resource="default" engine="innodb" comment="Alevel Order">
@@ -27,7 +21,7 @@
                 comment="Customer name"/>
         <column xsi:type="varchar"
                 name="phone"
-                length="13"
+                length="20"
                 nullable="false"
                 comment="Customer Phone"/>
         <column xsi:type="varchar"
@@ -48,7 +42,7 @@
                 default="CURRENT_TIMESTAMP"
                 comment="Update Time"/>
         <column xsi:type="varchar"
-                name="label"
+                name="status"
                 length="20"
                 nullable="false"
                 comment="Status Label"/>
@@ -68,7 +62,7 @@
                 identity="true"
                 comment="Status Id"/>
         <column xsi:type="varchar"
-                name="label"
+                name="status"
                 length="20"
                 nullable="false"
                 comment="Status name"/>

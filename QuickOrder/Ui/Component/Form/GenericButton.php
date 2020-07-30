@@ -7,6 +7,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
 
 use ALevel\QuickOrder\Api\Repository\StatusRepositoryInterface;
 
+
 class GenericButton
 {
     /**
@@ -41,7 +42,7 @@ class GenericButton
         try {
             return $this->repository->getById(
                 $this->context->getRequest()->getParam('id')
-            )->getStatusId();
+            )->getId();
         } catch (NoSuchEntityException $e) {
         }
         return null;

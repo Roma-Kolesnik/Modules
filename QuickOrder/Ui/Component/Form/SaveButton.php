@@ -7,7 +7,7 @@ use Magento\Ui\Component\Control\Container;
 
 /**
  * Class SaveButton
- * @package ALevel\QuickOrder\Ui\Component\Form
+ * @package ALevel\QuickOrder\UI\Component\Form
  */
 class SaveButton extends GenericButton implements ButtonProviderInterface
 {

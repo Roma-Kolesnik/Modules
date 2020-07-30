@@ -1,6 +1,5 @@
 <?php
 
-
 namespace ALevel\QuickOrder\Controller\Adminhtml\Status;
 
 use ALevel\QuickOrder\Api\Repository\StatusRepositoryInterface;
@@ -10,29 +9,27 @@ use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Psr\Log\LoggerInterface;
 
-class Delete extends Action
+class MassDelete extends Action
 {
     /** @var StatusRepositoryInterface */
     private $repository;
 
-    /** @var LoggerInterface */
     private $logger;
 
     /**
-     * Delete constructor.
+     * MassDelete constructor.
      *
      * @param Context                   $context
      * @param StatusRepositoryInterface   $repository
-     * @param LoggerInterface           $logger
      */
     public function __construct(
         Context $context,
         StatusRepositoryInterface $repository,
         LoggerInterface $logger
     ) {
+        $this->repository = $repository;
+        $this->logger     = $logger;
         parent::__construct($context);
-        $this->repository   = $repository;
-        $this->logger       = $logger;
     }
 
     /**
@@ -44,20 +41,22 @@ class Delete extends Action
             return $this->_redirect('*/*/listing');
         }
 
-        $id = $this->getRequest()->getParam('status_id');
+        $ids = $this->getRequest()->getParam('selected');
 
-        if (empty($id)) {
-            $this->messageManager->addWarningMessage(__("Please select status id"));
+        if (empty($ids)) {
+            $this->messageManager->addWarningMessage(__("Please select ids"));
             return $this->_redirect('*/*/listing');
         }
 
-        try {
-            $this->repository->deleteById($id);
-        } catch (NoSuchEntityException|CouldNotDeleteException $e) {
-            $this->logger->info(sprintf("item %d already delete", $id));
+        foreach ($ids as $id) {
+            try {
+                $this->repository->deleteById($id);
+            } catch (NoSuchEntityException|CouldNotDeleteException $e) {
+                $this->logger->info(sprintf("item %d already delete", $id));
+            }
         }
 
-        $this->messageManager->addSuccessMessage(sprintf("item %d was deleted", $id));
+        $this->messageManager->addSuccessMessage(sprintf("items %s was deleted", implode(',', $ids)));
         $this->_redirect('*/*/listing');
     }
 }
