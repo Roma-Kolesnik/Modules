@@ -15,9 +15,9 @@
     </argument>
     <settings>
         <buttons>
-            <button name="save" class="ALevel\QuickOrder\Ui\Component\Form\SaveButton"/>
-            <button name="back" class="ALevel\QuickOrder\Ui\Component\Form\BackButton"/>
-            <button name="delete" class="ALevel\QuickOrder\Ui\Component\Form\DeleteButton"/>
+            <button name="save" class="ALevel\QuickOrder\Block\Adminhtml\Status\Edit\SaveButton"/>
+            <button name="back" class="ALevel\QuickOrder\Block\Adminhtml\Status\Edit\BackButton"/>
+            <button name="delete" class="ALevel\QuickOrder\Block\Adminhtml\Status\Edit\DeleteButton"/>
         </buttons>
         <namespace>status_form</namespace>
         <dataScope>data</dataScope>

@@ -60,7 +60,7 @@ class StatusRepository implements StatusRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function getById(int $id): StatusInterface
+    public function getById($id): StatusInterface
     {
         $status = $this->modelFactory->create();
 

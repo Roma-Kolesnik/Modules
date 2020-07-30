@@ -16,13 +16,13 @@
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="class" xsi:type="string">\Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
             <argument name="name" xsi:type="string">order_grid_listing_data_source</argument>
-            <argument name="primaryFieldName" xsi:type="string">id</argument>
-            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="primaryFieldName" xsi:type="string">order_id</argument>
+            <argument name="requestFieldName" xsi:type="string">order_id</argument>
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="update_url" xsi:type="url" path="mui/index/render" />
                     <item name="storageConfig" xsi:type="array">
-                        <item name="indexField" xsi:type="string">id</item>
+                        <item name="indexField" xsi:type="string">order_id</item>
                     </item>
                 </item>
             </argument>
@@ -111,6 +111,7 @@
             <item name="config" xsi:type="array">
                 <item name="indexField" xsi:type="string">order_id</item>
             </item>
+            <item name="sortOrder" xsi:type="number">0</item>
         </argument>
     </selectionsColumn>
 
@@ -118,7 +119,7 @@
         <column name="order_id">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">Record ID</item>
+                    <item name="filter" xsi:type="string">Order ID</item>
                     <item name="label" xsi:type="string" translate="true">Order ID</item>
                     <item name="sortOrder" xsi:type="number">10</item>
                     <item name="editor" xsi:type="string">text</item>
