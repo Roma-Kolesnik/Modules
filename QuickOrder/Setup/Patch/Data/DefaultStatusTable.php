@@ -7,7 +7,7 @@ use ALevel\QuickOrder\Api\Data\StatusInterfaceFactory;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Framework\DB\TransactionFactory;
 
-class FillStatusTable implements DataPatchInterface
+class DefaultStatusTable implements DataPatchInterface
 {
     /**
      * @var TransactionFactory
@@ -22,22 +22,14 @@ class FillStatusTable implements DataPatchInterface
     public function __construct(
         TransactionFactory $transactionFactory,
         StatusInterfaceFactory $statusInterfaceFactory
-    ) {
+    )
+    {
         $this->transactionModel = $transactionFactory;
-        $this->modelFactory     = $statusInterfaceFactory;
+        $this->modelFactory = $statusInterfaceFactory;
     }
 
     /**
-     * Get array of patches that have to be executed prior to this.
-     *
-     * example of implementation:
-     *
-     * [
-     *      \Vendor_Name\Module_Name\Setup\Patch\Patch1::class,
-     *      \Vendor_Name\Module_Name\Setup\Patch\Patch2::class
-     * ]
-     *
-     * @return string[]
+     * @return array|string[]
      */
     public static function getDependencies()
     {
@@ -45,9 +37,7 @@ class FillStatusTable implements DataPatchInterface
     }
 
     /**
-     * Get aliases (previous names) for the patch.
-     *
-     * @return string[]
+     * @return array|string[]
      */
     public function getAliases()
     {
@@ -55,13 +45,7 @@ class FillStatusTable implements DataPatchInterface
     }
 
     /**
-     * Run code inside patch
-     * If code fails, patch must be reverted, in case when we are speaking about schema - than under revert
-     * means run PatchInterface::revert()
-     *
-     * If we speak about data, under revert means: $transaction->rollback()
-     *
-     * @return $this
+     * @return DefaultStatusTable|void
      */
     public function apply()
     {
@@ -87,7 +71,6 @@ class FillStatusTable implements DataPatchInterface
             $model->addData($data);
             $transactionalModel->addObject($model);
         }
-
         $transactionalModel->save();
     }
 }
