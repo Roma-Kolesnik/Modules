@@ -24,7 +24,6 @@ interface StatusInterface
     public function setStatusId($status_id);
 
     /**
-     * @param $status_code
      * @return mixed
      */
     public function getStatusCode();

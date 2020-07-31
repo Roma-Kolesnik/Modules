@@ -74,32 +74,11 @@
                     </item>
                 </argument>
             </action>
-            <action name="edit">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="type" xsi:type="string">edit</item>
-                        <item name="label" xsi:type="string" translate="true">Edit</item>
-                        <item name="callback" xsi:type="array">
-                            <item name="provider" xsi:type="string">status_grid.status_grid.status_grid_columns_editor</item>
-                            <item name="target" xsi:type="string">editSelected</item>
-                        </item>
-                    </item>
-                </argument>
-            </action>
         </massaction>
         <paging name="listing_paging"/>
     </listingToolbar>
     <columns name="status_grid_columns">
         <settings>
-            <editorConfig>
-                <param name="clientConfig" xsi:type="array">
-                    <item name="saveUrl" xsi:type="url" path="*/*/inlineEdit"/>
-                    <item name="validateBeforeSave" xsi:type="boolean">false</item>
-                </param>
-                <param name="indexField" xsi:type="string">status_id</param>
-                <param name="enabled" xsi:type="boolean">true</param>
-                <param name="selectProvider" xsi:type="string">status_grid.status_grid.status_grid_columns.ids</param>
-            </editorConfig>
             <childDefaults>
                 <param name="fieldAction" xsi:type="array">
                     <item name="provider" xsi:type="string">status_grid.status_grid.status_grid_columns_editor</item>
@@ -115,6 +94,7 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="indexField" xsi:type="string">status_id</item>
+                    <item name="sortOrder" xsi:type="number">0</item>
                 </item>
             </argument>
         </selectionsColumn>
@@ -123,9 +103,9 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="visible" xsi:type="boolean">true</item>
-                    <item name="editor" xsi:type="string">text</item>
                     <item name="filter" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Status Code</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
                 </item>
             </argument>
         </column>
@@ -134,18 +114,17 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="visible" xsi:type="boolean">true</item>
-                    <item name="editor" xsi:type="string">text</item>
                     <item name="filter" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Status Label</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
                 </item>
             </argument>
         </column>
 
-        <actionsColumn name="actions" class="ALevel\QuickOrder\Ui\Component\Listing\Column\ActionsStatus">
+        <actionsColumn name="actions" class="ALevel\QuickOrder\Ui\Component\Listing\Column\ActionsStatus" sortOrder="200">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="indexField" xsi:type="string">status_id</item>
-                    <item name="sortOrder" xsi:type="number">200</item>
                 </item>
             </argument>
         </actionsColumn>

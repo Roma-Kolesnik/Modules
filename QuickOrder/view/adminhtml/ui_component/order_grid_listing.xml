@@ -74,13 +74,6 @@
         </paging>
     </container>
     <columns name="order_grid_columns">
-        <selectionsColumn name="ids">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="indexField" xsi:type="string">order_id</item>
-                </item>
-            </argument>
-        </selectionsColumn>
         <column name="order_id">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -117,7 +110,7 @@
         <column name="phone">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">Phone</item>
+                    <item name="filter" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Phone</item>
                     <item name="sortOrder" xsi:type="number">40</item>
                     <item name="editor" xsi:type="string">text</item>
@@ -128,7 +121,7 @@
         <column name="email">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">email</item>
+                    <item name="filter" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Email</item>
                     <item name="sortOrder" xsi:type="number">42</item>
                     <item name="editor" xsi:type="string">text</item>
@@ -155,7 +148,7 @@
         <column name="status">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">status</item>
+                    <item name="filter" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Status</item>
                     <item name="sortOrder" xsi:type="number">50</item>
                 </item>
@@ -169,15 +162,6 @@
                     <item name="label" xsi:type="string" translate="true">Change Status</item>
                 </item>
                 <item name="sortOrder" xsi:type="number">80</item>
-            </argument>
-        </actionsColumn>
-
-        <actionsColumn name="actions" class="ALevel\QuickOrder\Ui\Component\Listing\Column\ActionsOrder">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="indexField" xsi:type="string">status_id</item>
-                    <item name="sortOrder" xsi:type="number">90</item>
-                </item>
             </argument>
         </actionsColumn>
 

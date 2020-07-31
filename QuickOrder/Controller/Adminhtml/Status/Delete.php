@@ -40,24 +40,20 @@ class Delete extends Action
      */
     public function execute()
     {
-        if (!$this->getRequest()->isPost()) {
-            return $this->_redirect('*/*/listing');
-        }
-
-        $id = $this->getRequest()->getParam('status_id');
+        $id = $this->getRequest()->getParam('id', null);
 
         if (empty($id)) {
             $this->messageManager->addWarningMessage(__("Please select status id"));
-            return $this->_redirect('*/*/listing');
+            return $this->_redirect('*/*/');
         }
 
         try {
             $this->repository->deleteById($id);
         } catch (NoSuchEntityException|CouldNotDeleteException $e) {
-            $this->logger->info(sprintf("item %d already delete", $id));
+            $this->logger->info(sprintf("Item %d already delete", $id));
         }
 
-        $this->messageManager->addSuccessMessage(sprintf("item %d was deleted", $id));
-        $this->_redirect('*/*/listing');
+        $this->messageManager->addSuccessMessage(sprintf("Item %d was deleted", $id));
+        $this->_redirect('*/*/');
     }
 }

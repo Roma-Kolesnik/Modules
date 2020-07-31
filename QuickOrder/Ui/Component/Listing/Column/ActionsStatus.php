@@ -18,6 +18,9 @@ class ActionsStatus extends Column
     /** @var string */
     private $editUrl;
 
+    /** @var string */
+    private $deleteUrl;
+
     /**
      * @param ContextInterface $context
      * @param UiComponentFactory $uiComponentFactory
@@ -32,11 +35,13 @@ class ActionsStatus extends Column
         UrlInterface $urlBuilder,
         array $components = [],
         array $data = [],
-        $editUrl = self::URL_PATH_EDIT
+        $editUrl = self::URL_PATH_EDIT,
+        $deleteUrl = self::URL_PATH_DELETE
     )
     {
         $this->urlBuilder = $urlBuilder;
         $this->editUrl = $editUrl;
+        $this->deleteUrl = $deleteUrl;
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
 
@@ -52,7 +57,7 @@ class ActionsStatus extends Column
                         'label' => __('Edit')
                     ];
                     $item[$name]['delete'] = [
-                        'href' => $this->urlBuilder->getUrl(self::URL_PATH_DELETE, ['id' => $item['status_id']]),
+                        'href' => $this->urlBuilder->getUrl($this->deleteUrl, ['id' => $item['status_id']]),
                         'label' => __('Delete'),
                         'confirm' => [
                             'title' => __('Delete "${ $.$data.status_code }"'),

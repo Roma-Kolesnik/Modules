@@ -61,11 +61,10 @@ class Save extends Action
                     $model = $this->repository->getById($id);
                 } catch (LocalizedException $e) {
                     $this->messageManager->addErrorMessage(__('This status no longer exists.'));
-                    $resultRedirect->setPath('*/*/listing');
+                    $resultRedirect->setPath('*/*/');
                 }
             }
 
-            $model->setData($data['status_id']);
             $model->setStatus($data['status']);
             $model->setStatusCode($data['status_code']);
 
@@ -81,9 +80,9 @@ class Save extends Action
             }
 
             $this->dataPersistor->set('status_id', $data);
-            return $resultRedirect->setPath('*/*/edit', ['id' => $id]);
+            return $resultRedirect->setPath('*/*/', ['id' => $id]);
         }
-        return $resultRedirect->setPath('*/*/listing');
+        return $resultRedirect->setPath('*/*/');
     }
 
     private function processReturn($model, $data, $resultRedirect)
@@ -91,9 +90,9 @@ class Save extends Action
         $redirect = $data['back'] ?? 'close';
 
         if ($redirect ==='continue') {
-            $resultRedirect->setPath('*/*/edit', ['id' => $model->getId()]);
+            $resultRedirect->setPath('*/*/', ['id' => $model->getId()]);
         } else if ($redirect === 'close') {
-            $resultRedirect->setPath('*/*/listing');
+            $resultRedirect->setPath('*/*/');
         }
 
         return $resultRedirect;

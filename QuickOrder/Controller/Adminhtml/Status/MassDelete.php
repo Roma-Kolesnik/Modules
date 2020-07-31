@@ -38,14 +38,14 @@ class MassDelete extends Action
     public function execute()
     {
         if (!$this->getRequest()->isPost()) {
-            return $this->_redirect('*/*/listing');
+            return $this->_redirect('*/*/');
         }
 
         $ids = $this->getRequest()->getParam('selected');
 
         if (empty($ids)) {
             $this->messageManager->addWarningMessage(__("Please select ids"));
-            return $this->_redirect('*/*/listing');
+            return $this->_redirect('*/*/');
         }
 
         foreach ($ids as $id) {
@@ -57,6 +57,6 @@ class MassDelete extends Action
         }
 
         $this->messageManager->addSuccessMessage(sprintf("items %s was deleted", implode(',', $ids)));
-        $this->_redirect('*/*/listing');
+        $this->_redirect('*/*/');
     }
 }

@@ -37,43 +37,6 @@ class SaveButton extends GenericButton implements ButtonProviderInterface
                     ]
                 ]
             ],
-            'class_name' => Container::SPLIT_BUTTON,
-            'options' => $this->getOptions(),
         ];
-    }
-
-    /**
-     * Retrieve options
-     *
-     * @return array
-     */
-    private function getOptions()
-    {
-        $options = [
-            [
-                'id_hard' => 'save_and_close',
-                'label' => __('Save & Close'),
-                'data_attribute' => [
-                    'mage-init' => [
-                        'buttonAdapter' => [
-                            'actions' => [
-                                [
-                                    'targetName' => 'status_form.status_form',
-                                    'actionName' => 'save',
-                                    'params' => [
-                                        true,
-                                        [
-                                            'back' => 'close'
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ];
-
-        return $options;
     }
 }
