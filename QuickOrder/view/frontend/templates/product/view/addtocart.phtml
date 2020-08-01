@@ -54,26 +54,49 @@
             "Magento_Catalog/js/validate-product": {}
         }
     }
-
 </script>
-
-<div data-bind="scope: 'component-quick-order'">
-    <!-- ko template: getTemplate() --><!-- /ko -->
-</div>
-
-<script type="text/x-magento-init">
-{
-    "*": {
-        "Magento_Ui/js/core/app": <?= /* @noEscape */ $block->getJsLayout() ?>
-    }
-}
-</script>
-
 
 <!--<script type="text/x-magento-init">-->
 <!--    {-->
 <!--        "*": {-->
-<!--            "ALevel_QuickOrder/js/components/send-info": {}-->
+<!--            "Magento_Ui/js/core/app": {-->
+<!--                "components": {-->
+<!--                    "alevel-popup":{-->
+<!--                        "component":"ALevel_QuickOrder/js/components/send-info",-->
+<!--                        "url": "/q_order/record/add"-->
+<!--                    }-->
+<!--                }-->
+<!--            }-->
 <!--        }-->
 <!--    }-->
 <!--</script>-->
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "ALevel_QuickOrder/js/components/send-info": {}
+        }
+    }
+</script>
+
+<div class="modal" id="quick-order-form" style="display:none;">
+    <form id="popup-modal-info" name="customerInfo" >
+        <h2>Write your information</h2>
+        <p><label for="customerName">Name: </label>
+            <input type="text" name="customerName" id="customerName" placeholder="Your name" required></p>
+        <p><label for="customerPhone">Phone: </label>
+            <input type="text" name="phone" id="customerPhone" placeholder="Your phone" required></p>
+        <p><label for="customerEmail">Email: </label>
+            <input type="email" name="email" id="customerEmail" placeholder="Your email"></p>
+        <input type="text" name="productSku" id="sku" style="display: none">
+        <p>
+            <button class="action primary tocart"
+                    type="button"
+                    name="sendInfo"
+                    id="sendInfo">
+                <span>Send</span>
+            </button>
+        </p>
+    </form>
+</div>
+

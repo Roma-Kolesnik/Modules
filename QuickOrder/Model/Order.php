@@ -68,14 +68,14 @@ class Order extends AbstractModel implements OrderInterface
         $this->setData(self::EMAIL, $email);
     }
 
-    public function getStatusId()
+    public function getStatus()
     {
-        return $this->_getData(self::STATUS_ID);
+        return $this->_getData(self::STATUS);
     }
 
-    public function setStatusId($id)
+    public function setStatus($status)
     {
-        $this->setData(self::STATUS_ID, $id);
+        $this->setData(self::STATUS, $status);
     }
 }
 

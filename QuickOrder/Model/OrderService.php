@@ -30,6 +30,7 @@ class OrderService
         $order->setPhone($request->getParam('phone'));
         $order->setEmail($request->getParam('email'));
         $order->setSKU($request->getParam('sku'));
+        $order->setStatus('Pending');
 
         return $order;
     }

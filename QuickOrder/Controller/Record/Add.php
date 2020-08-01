@@ -26,7 +26,8 @@ class Add extends Action
         Context $context,
         OrderRepository $orderRepository,
         OrderService $orderService
-    ){
+    )
+    {
         parent::__construct($context);
         $this->orderRepository = $orderRepository;
         $this->orderService = $orderService;
@@ -34,23 +35,28 @@ class Add extends Action
 
     public function execute()
     {
-        $name = $this->getRequest()->getParam('name');
-        $phone = $this->getRequest()->getParam('phone');
-        $email = $this->getRequest()->getParam('email');
-        $sku = $this->getRequest()->getParam('sku');
-
         $resultJson = $this->resultFactory->create(ResultFactory::TYPE_JSON);
 
-        if($this->getRequest()->isAjax()) {
+        if ($this->getRequest()->isAjax()) {
             $newObject = $this->orderService->prepareObjectOrder($this->getRequest());
-            $this->orderRepository->save($newObject);
-        }
 
-        return $resultJson->setData(
-            [
-                'errors' => false,
-                'message' => __('Your order is saved'),
-            ]
-        );
+            try {
+                $this->orderRepository->save($newObject);
+                return $resultJson->setData(
+                    [
+                        'errors' => false,
+                        'message' => __('Your order is saved'),
+                    ]
+                );
+            } catch (\Exception $e) {
+                return $resultJson->setData(
+                    [
+                        'errors' => true,
+                        'message' => __('Something went wrong'),
+                    ]
+                );
+            }
+        }
+        return true;
     }
 }
