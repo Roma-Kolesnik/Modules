@@ -65,6 +65,7 @@ define([
                         dataType: 'json'
                     }).done(function (response) {
                         console.log(response);
+                        $("#errorMessage").hide();
                         $("#quick-order-form").modal("closeModal");
                     }).fail(function (error) {
                         console.log(JSON.stringify(error));

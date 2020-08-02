@@ -85,8 +85,6 @@ class Edit extends Action
             }
 
             $model->setStatus($data);
-            $fullDate = date("y-m-d h:i:s");
-            $model->setUpdate_at($fullDate);
 
             try {
                 $this->repository->save($model);
