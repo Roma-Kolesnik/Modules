@@ -35,33 +35,49 @@ define([
             });
 
             $("#sendInfo").click(function () {
-                let name, phone, email, sku;
+                let name, phone, phoneIsNumber, email, sku;
 
                 name = $("#customerName").val();
                 phone = $("#customerPhone").val();
+                phoneIsNumber = Number(phone);
                 email = $("#customerEmail").val();
                 sku = $("#product_addtocart_form").attr("data-product-sku")
 
-                let data = {
-                    'name': name,
-                    'phone': phone,
-                    'email': email,
-                    'sku': sku
-                };
+                if (
+                    typeof (name) == "string" && name.length != 0 &&
+                    Number.isInteger(phoneIsNumber) == true && phoneIsNumber != 0 && phone.length != 0 &&
+                    correctEmail(email) == true && email.length != 0
+                ) {
 
-                let url = urlBuilder.build('q_order/record/add');
+                    let data = {
+                        'name': name,
+                        'phone': phone,
+                        'email': email,
+                        'sku': sku
+                    };
 
-                $.ajax({
-                    url: url,
-                    data: data,
-                    type: 'POST',
-                    dataType: 'json'
-                }).done(function (response) {
-                    console.log(response);
-                    this.closeModal();
-                }).fail(function (error) {
-                    console.log(JSON.stringify(error))
-                });
+                    let url = urlBuilder.build('q_order/record/add');
+
+                    $.ajax({
+                        url: url,
+                        data: data,
+                        type: 'POST',
+                        dataType: 'json'
+                    }).done(function (response) {
+                        console.log(response);
+                        $("#quick-order-form").modal("closeModal");
+                    }).fail(function (error) {
+                        console.log(JSON.stringify(error));
+                    });
+                } else {
+                    $("#errorMessage").html("<span style= 'color: red'>Your data is not valid</span>");
+                }
+
+                function correctEmail(email) {
+                    let reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    //^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+                    return reg.test(email);
+                }
             });
         });
     }

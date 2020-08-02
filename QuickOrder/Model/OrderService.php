@@ -4,6 +4,10 @@ namespace ALevel\QuickOrder\Model;
 
 use ALevel\QuickOrder\Api\Data\OrderInterfaceFactory;
 
+/**
+ * Class OrderService
+ * @package ALevel\QuickOrder\Model
+ */
 class OrderService
 {
     /**
@@ -22,15 +26,25 @@ class OrderService
         $this->orderInterfaceFactory = $orderInterfaceFactory;
     }
 
+    /**
+     * @param $request
+     * @return mixed
+     */
     public function prepareObjectOrder($request)
     {
         $order = $this->orderInterfaceFactory->create();
 
-        $order->setName($request->getParam('name'));
-        $order->setPhone($request->getParam('phone'));
-        $order->setEmail($request->getParam('email'));
-        $order->setSKU($request->getParam('sku'));
-        $order->setStatus('Pending');
+        $name = $request->getParam('name');
+        $phone = $request->getParam('phone');
+        $email = $request->getParam('email');
+        $sku = $request->getParam('sku');
+        $status = 'Pending';
+
+        $order->setName($name);
+        $order->setPhone($phone);
+        $order->setEmail($email);
+        $order->setSKU($sku);
+        $order->setStatus($status);
 
         return $order;
     }

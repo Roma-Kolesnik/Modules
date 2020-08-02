@@ -8,7 +8,10 @@ use Magento\Framework\App\Action\Context;
 use ALevel\QuickOrder\Repository\OrderRepository;
 use ALevel\QuickOrder\Model\OrderService;
 
-
+/**
+ * Class Add
+ * @package ALevel\QuickOrder\Controller\Record
+ */
 class Add extends Action
 {
 
@@ -22,6 +25,12 @@ class Add extends Action
      */
     private $orderService;
 
+    /**
+     * Add constructor.
+     * @param Context $context
+     * @param OrderRepository $orderRepository
+     * @param OrderService $orderService
+     */
     public function __construct(
         Context $context,
         OrderRepository $orderRepository,
@@ -33,6 +42,9 @@ class Add extends Action
         $this->orderService = $orderService;
     }
 
+    /**
+     * @return bool|\Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
+     */
     public function execute()
     {
         $resultJson = $this->resultFactory->create(ResultFactory::TYPE_JSON);
@@ -57,6 +69,5 @@ class Add extends Action
                 );
             }
         }
-        return true;
     }
 }

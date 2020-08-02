@@ -16,17 +16,17 @@ class DeleteButton extends GenericButton implements ButtonProviderInterface
      */
     public function getButtonData()
     {
-            $data = [
-                'label' => __('Delete Status'),
-                'class' => 'delete',
-                'data_attribute' => [
-                    'url' => $this->getDeleteUrl()
-                ],
-                'on_click' => 'deleteConfirm(\'' . __(
-                        'Are you sure you want to do this?'
-                    ) . '\', \'' . $this->getDeleteUrl() . '\', {"data": {}})',
-                'sort_order' => 20,
-            ];
+        $data = [
+            'label' => __('Delete Status'),
+            'class' => 'delete',
+            'data_attribute' => [
+                'url' => $this->getDeleteUrl()
+            ],
+            'on_click' => 'deleteConfirm(\'' . __(
+                    'Are you sure you want to do this?'
+                ) . '\', \'' . $this->getDeleteUrl() . '\', {"data": {}})',
+            'sort_order' => 20,
+        ];
 
         return $data;
     }

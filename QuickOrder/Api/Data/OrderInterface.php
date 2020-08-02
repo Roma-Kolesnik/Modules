@@ -2,6 +2,10 @@
 
 namespace ALevel\QuickOrder\Api\Data;
 
+/**
+ * Interface OrderInterface
+ * @package ALevel\QuickOrder\Api\Data
+ */
 interface OrderInterface
 {
     const ORDER_ID = 'order_id';
